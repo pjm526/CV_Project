@@ -1,5 +1,5 @@
-import matplotlib.pyplot as plt
-import matplotlib.image as mpimg
+#import matplotlib.pyplot as plt
+#import matplotlib.image as mpimg
 import numpy as np
 import cv2
 
@@ -119,4 +119,3 @@ def otsu_method(img_p):
 				result_img[i][j] = 0
 
 	return result_img
-

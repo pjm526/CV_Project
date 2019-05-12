@@ -5,16 +5,17 @@ import math
 import os
 import time
 import pyautogui
-os.chdir("E:/Hand-Gesture-Recognition-for-Presentation-Process-in-Python-master")
+import image_cleanup
+
+#os.chdir("C:/Users/preks/OneDrive/Desktop/CV_Project-master/CV_Project-master")
 def ok_crop(crop_img,img):
     grey = cv2.cvtColor(crop_img, cv2.COLOR_BGR2GRAY)
     
-    value = (35, 35)
-    blurred = cv2.GaussianBlur(grey, value, 0)
+    # applying gaussian blur
+    blurred = image_cleanup.gaussian_method(grey)
 
-
-    _, thresh1 = cv2.threshold(blurred, 127, 255,
-                               cv2.THRESH_BINARY_INV+cv2.THRESH_OTSU)
+    # thresholding: Otsu's Binarization method
+    thresh1 = image_cleanup.otsu_method(blurred)
 
 
     cv2.imshow('Thresholded', thresh1)
@@ -80,7 +81,7 @@ def ok_crop(crop_img,img):
 
         
     if count_defects == 3 or count_defects==2:
-        keyboard.press_and_release('+')   
+        keyboard.press_and_release('-')   
     else:
         cv2.putText(img,"0", (50, 50),\
             cv2.FONT_HERSHEY_SIMPLEX, 2, 2)
